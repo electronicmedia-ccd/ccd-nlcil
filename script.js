@@ -108,6 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // ===========================
     // SMOOTH SCROLL
     // ===========================
+    const headerEl = document.querySelector("header");
+    // Header is two rows tall now; offset by its full height + breathing room
+    const headerOffset = () => (headerEl ? headerEl.offsetHeight + 10 : 90);
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
 
@@ -126,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (menuToggle) menuToggle.textContent = '☰';
 
                 window.scrollTo({
-                    top: target.offsetTop - 80,
+                    top: target.getBoundingClientRect().top + window.scrollY - headerOffset(),
                     behavior: "smooth"
                 });
             }
@@ -188,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         sections.forEach(section => {
             const height = section.offsetHeight;
-            const top = section.offsetTop - 150;
+            const top = section.getBoundingClientRect().top + window.scrollY - headerOffset();
             const id = section.getAttribute("id");
 
             const link = document.querySelector(`.nav-links a[href="#${id}"]`);
