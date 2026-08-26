@@ -226,7 +226,8 @@ header {
     box-shadow: var(--shadow-lg);
     border-radius: 12px;
     overflow: hidden;
-    margin-top: 0.5rem;
+    margin-top: 2.9rem;
+    margin-left: 2rem;
     max-height: 80vh;
     overflow-y: auto;
     z-index: 9999;
@@ -344,7 +345,6 @@ header {
 
 .about p {
     max-width: 900px;
-    margin: 3rem auto 0;
     font-size: 1.15rem;
     line-height: 1.9;
     color: var(--medium-gray);
@@ -1267,7 +1267,7 @@ footer p:last-child {
     align-items: center;
     gap: 90px;
     max-width: 1100px;
-    margin: auto auto 20px 130px;
+    margin: 0 auto 20px;
 }
 
 .action-figure {
@@ -1283,3 +1283,38 @@ footer p:last-child {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+/* .table-title h1{
+            color: #1a365d;
+            text-align: center;
+        } */
+        .directory-table {
+            width: 100%;
+            border-collapse: collapse;
+            /* margin-top: 20px; */
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .directory-table th, .directory-table td {
+            padding: 10px 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .directory-table th {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .section-header {
+            background-color: #edf2f7;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .directory-table tr:nth-child(even):not(.section-header) {
+            background-color: #f7fafc;
+        }
+        .designation {
+            font-size: 0.85em;
+            color: #4a5568;
+            display: block;
+        }
