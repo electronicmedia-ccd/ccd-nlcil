@@ -116,7 +116,7 @@ header {
     opacity: 0.95;
     letter-spacing: 0.3px;
     margin-top: 2px;
-    padding: 0px 0px 0px 24px;
+    padding: 0px 0px 0px 28px;
 }
 
 /* Department tagline */
@@ -1298,23 +1298,24 @@ footer p:last-child {
         .directory-table th, .directory-table td {
             padding: 10px 12px;
             text-align: center;
+            font-weight: bold;
             border: 1px solid #e2e8f0;
         }
         .directory-table th {
-            background-color: #2b6cb0;
+            background-color: #1c357d;
             color: #ffffff;
             font-weight: bold;
         }
         .section-header {
-            background-color: #edf2f7;
+            background-color: #1c357d;
             font-weight: bold;
-            color: #2d3748;
+            color: #ffffff;
         }
         .directory-table tr:nth-child(even):not(.section-header) {
             background-color: #f7fafc;
         }
         .designation {
             font-size: 0.85em;
-            color: #4a5568;
+            color: #1f4485;
             display: block;
         }
