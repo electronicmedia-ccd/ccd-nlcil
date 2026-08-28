@@ -24,6 +24,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
     zoom: 70%;
 }
 
@@ -310,13 +311,16 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 50px 0;
+    padding: 80px 0;
 }
 
 /* ===========================
    ABOUT SECTION
    =========================== */
 .about {
+    position: relative;
+    width: 100%;
+    justify-content: center;
     padding: 1rem 2rem;
     background: linear-gradient(to bottom, var(--white), var(--light-gray));
     text-align: center;
@@ -461,7 +465,7 @@ header {
    CONTACT SECTION
    =========================== */
 .contact {
-    padding: 6rem 2rem;
+    padding: 8rem 2rem;
     background: linear-gradient(to bottom, var(--light-gray), var(--white));
 }
 
@@ -493,37 +497,42 @@ header {
     display: flex;
     align-items: stretch;
     justify-content: center;
-    gap: 3rem;
+    gap: 2rem;
     max-width: 1000px;
     margin: auto;
     flex-wrap: wrap;
 }
 
-/* Left: contact info cards */
-.contact-info {
-    flex: 1;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
+/* Updated Card Styles */
 .contact-item {
-    display: inline-block;
-    align-items: center;
-    text-align: center;
-    gap: 1.2rem;
+    flex: 1;
+    min-width: 300px;
     background: var(--white);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow-sm);
     border-left: 4px solid var(--secondary-blue);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .contact-item:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
+}
+
+.contact-sub-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+}
+
+.contact-divider {
+    border: 0;
+    border-top: 1px solid var(--light-gray, #eee);
+    margin: 1.5rem 0;
 }
 
 .contact-item i {
@@ -541,7 +550,7 @@ header {
 
 .contact-item p a {
     text-decoration: none;
-    color: var(--primary-color, #0056b3); /* Distinct link color */
+    color: var(--primary-color, #0056b3);
     font-weight: 700;
     border-bottom: 1px solid transparent;
     transition: all 0.2s ease-in-out;
@@ -549,62 +558,10 @@ header {
 
 .contact-item p a:hover {
     color: var(--hover-color, #003366);
-    border-bottom-color: currentColor;      /* Subtle animated line on hover */
+    border-bottom-color: currentColor;
 }
 
-/* Right: form */
-.contact-form {
-    flex: 1;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
-}
 
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border: 1px solid rgba(30, 58, 138, 0.2);
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    background: var(--light-gray);
-    transition: var(--transition);
-    resize: vertical;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: var(--secondary-blue);
-    background: var(--white);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
-.contact-form button {
-    padding: 0.9rem 2rem;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-    color: var(--white);
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    letter-spacing: 0.5px;
-}
-
-.contact-form button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    filter: brightness(1.08);
-}
 
 @media (max-width: 768px) {
     .contact {
@@ -1288,34 +1245,59 @@ footer p:last-child {
             color: #1a365d;
             text-align: center;
         } */
-        .directory-table {
-            width: 100%;
-            border-collapse: collapse;
-            /* margin-top: 20px; */
-            background: #ffffff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .directory-table th, .directory-table td {
-            padding: 10px 12px;
-            text-align: center;
-            font-weight: bold;
-            border: 1px solid #e2e8f0;
-        }
-        .directory-table th {
-            background-color: #1c357d;
-            color: #ffffff;
-            font-weight: bold;
-        }
-        .section-header {
-            background-color: #1c357d;
-            font-weight: bold;
-            color: #ffffff;
-        }
-        .directory-table tr:nth-child(even):not(.section-header) {
-            background-color: #f7fafc;
-        }
-        .designation {
-            font-size: 0.85em;
-            color: #1f4485;
-            display: block;
-        }
+        /* Ensure the parent container expands to full browser width */
+main.container, 
+.container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0px; /* Optional side padding so text doesn't touch screen edges */
+    box-sizing: border-box;
+}
+
+/* Full-width table styling */
+.directory-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Expanded padding and vertical height for full-page feel */
+.directory-table th, 
+.directory-table td {
+    padding: 16px 20px; /* Increased padding for vertical expansion */
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.directory-table th {
+    background-color: #1c357d;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.section-header {
+    background-color: #1c357d;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.directory-table tr:nth-child(even):not(.section-header) {
+    background-color: #f7fafc;
+}
+
+.designation {
+    font-size: 0.85em;
+    color: #1f4485;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Optional column proportioning to balance space across full width */
+.directory-table th:nth-child(1) { width: 8%; }  /* S.No. */
+.directory-table th:nth-child(2) { width: 32%; } /* Section / Department */
+.directory-table th:nth-child(3) { width: 40%; } /* Name & Designation */
+.directory-table th:nth-child(4) { width: 20%; } /* Contact No. */
