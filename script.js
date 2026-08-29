@@ -378,3 +378,95 @@ setInterval(() => {
 /* Initial */
 
 showPortrait(portraitIndex);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const indicatorsContainer = document.getElementById('indicators');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const engine = document.getElementById('carouselEngine');
+
+  let currentIndex = 0;
+  const total = cards.length;
+  const autoPlayInterval = 5000;
+  let autoPlayTimer;
+
+  // Build Pagination Dots
+  cards.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot-pill');
+    if (idx === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goTo(idx));
+    indicatorsContainer.appendChild(dot);
+  });
+
+  const dots = Array.from(indicatorsContainer.children);
+
+  function updateCarousel() {
+    cards.forEach((card, index) => {
+      card.classList.remove('active', 'prev-card', 'next-card', 'hidden');
+
+      if (index === currentIndex) {
+        card.classList.add('active');
+      } else if (index === (currentIndex - 1 + total) % total) {
+        card.classList.add('prev-card');
+      } else if (index === (currentIndex + 1) % total) {
+        card.classList.add('next-card');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+  }
+
+  function goTo(index) {
+    currentIndex = index;
+    updateCarousel();
+    resetAutoplay();
+  }
+
+  function next() {
+    currentIndex = (currentIndex + 1) % total;
+    updateCarousel();
+  }
+
+  function prev() {
+    currentIndex = (currentIndex - 1 + total) % total;
+    updateCarousel();
+  }
+
+  function startAutoplay() {
+    autoPlayTimer = setInterval(next, autoPlayInterval);
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoPlayTimer);
+    startAutoplay();
+  }
+
+  // Touch & Swipe Support
+  let startX = 0;
+  engine.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  engine.addEventListener('touchend', e => {
+    const diffX = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) { next(); } else { prev(); }
+      resetAutoplay();
+    }
+  }, { passive: true });
+
+  // Navigation Click Handlers
+  nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
+  prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
+
+  // Hover Pause Behavior
+  engine.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
+  engine.addEventListener('mouseleave', startAutoplay);
+
+  // Initialize
+  updateCarousel();
+  startAutoplay();
+});
