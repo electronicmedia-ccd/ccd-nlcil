@@ -903,7 +903,7 @@ footer p:last-child {
 .portrait-slider {
     position: relative;
     width: 100%;
-    max-width: 580px;
+    width: min(409px, 80vw);
     aspect-ratio: 12 / 16;
     outline: 12px;
     margin-inline: auto;
