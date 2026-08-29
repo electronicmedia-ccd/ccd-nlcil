@@ -39,11 +39,11 @@
     <nav class="navbar">
       <div class="container navbar-inner">
         <ul class="nav-links">
-          <li><a href="#home">HOME</a></li>
+          <li><a href="#portrait-slider">HOME</a></li>
           <li><a href="#about">ABOUT</a></li>
 
           <li class="dropdown">
-            <a class="dropdown-toggle">DIVISIONS<span class="arrow"></span></a>
+            <a href="#services" class="dropdown-toggle">DIVISIONS<span class="arrow"></span></a>
             <ul class="submenu">
               <li><a href="advertisement.html">Advertisements & Sponsorships</a></li>
 <li><a href="electronic-media.html">Electronic Media</a></li>
@@ -99,7 +99,7 @@
               <li><a class="dropdown-item" href="http://ldc.nlcindia.com/tccoordination/libtd/DEFAULT.asp" target="_blank" rel="noopener noreferrer">L&amp;DC Library</a></li>
             </ul>
 
-            <li><a href="#contact">CONTACT US</a></li>
+            <li><a href="#contact-container">CONTACT US</a></li>
 
           </li>
            <li><a href="teledir.pdf">TELEPHONE DIRECTORY</a></li>
@@ -118,7 +118,7 @@
 
       <!-- LEFT: Portrait Slider -->
       <div class="profile-area">
-        <div class="portrait-slider">
+        <div id="portrait-slider" class="portrait-slider">
           <div class="p-slide active">
             <img src="images/cmd.png" loading="lazy" decoding="async" alt="Profile Photo 1">
           </div>
@@ -182,8 +182,8 @@
   <!-- =============================================
        ABOUT
   ============================================== -->
-  <section id="about" class="about">
-    <h2>About Corporate Communications</h2>
+  <section class="about">
+    <h2 id="about">About Corporate Communications</h2>
     <div class="about-content">
       <img class="action-figure" src="images/Lion_Mascot.png" alt="Action Figure Model">
       <p class="about-text">
@@ -196,36 +196,76 @@
   <!-- =============================================
        SERVICES / ACTIVITIES
   ============================================== -->
-  <section id="services" class="services">
-    <h2>Activities</h2>
-    <div class="service-container">
-      <div class="cards-grid">
-        <div class="card">
-          <h3>Brand Enhancement</h3>
-          <p>The Corporate Communications Department plays a vital role in strengthening brand visibility by strategically communicating the organization's values, achievements, and initiatives to internal and external stakeholders.</p>
+ <section class="services">
+  <h2 id="services">Activities</h2>
+  <div class="service-container">
+    
+    <!-- Ultra Modern Carousel Engine -->
+    <div class="carousel-engine" id="carouselEngine">
+      <div class="carousel-track" id="carouselTrack">
+        
+        <div class="card active" data-index="0">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <h3>Brand Enhancement</h3>
+            <p>The Corporate Communications Department plays a vital role in strengthening brand visibility by strategically communicating the organization's values, achievements, and initiatives to internal and external stakeholders.</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Public Relations</h3>
-          <p>Maintaining relationships with stakeholders and society.</p>
+
+        <div class="card" data-index="1">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <h3>Public Relations</h3>
+            <p>Maintaining relationships with stakeholders and society.</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Media Excellence & Reputation Management</h3>
-          <p>Shaping a strong public image through strategic press communication, media engagement, and build credibility.</p>
+
+        <div class="card" data-index="2">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <h3>Media Excellence & Reputation Management</h3>
+            <p>Shaping a strong public image through strategic press communication, media engagement, and build credibility.</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Corporate Events & Exhibitions</h3>
-          <p>Organizing conferences and official programs.</p>
+
+        <div class="card" data-index="3">
+          <div class="card-glow"></div>
+          <div class="card-content">
+            <h3>Corporate Events & Exhibitions</h3>
+            <p>Organizing conferences and official programs.</p>
+          </div>
         </div>
+
       </div>
+
+      <!-- UX Controls -->
+      <div class="ux-controls">
+        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous Activity">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="indicators" id="indicators"></div>
+
+        <button class="nav-arrow next" id="nextBtn" aria-label="Next Activity">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Media Showcase Wrapper -->
+    <div class="media-frame">
+      <div class="glow-orb"></div>
       <img class="action-figure2" src="images/qr.png" alt="Action Figure Model">
     </div>
-  </section>
+
+  </div>
+</section>
 
 <!-- =============================================
      CONTACT US
 ============================================== -->
 <section id="contact" class="contact">
-  <h2>Contact Us</h2>
+  <h2 id="contact-container">Contact Us</h2>
   <div class="contact-container">
 
     <!-- Combined Phone & Email Card -->
@@ -247,7 +287,7 @@
         <i class="fas fa-envelope"></i>
         <div>
           <h4>Email</h4>
-          <p><a href="mailto:nlcil.ccdept@nlcindia.in">nlcil.ccdept@nlcindia.in</a></p>
+          <p><a href="mailto:nlcil.ccdept@nlcindia.in">nlcil.ccdept@nlcindia.in  <a style="color: #f59e0b;" href="mailto:nlcil.ccdept@nlcindia.in">- click to mail</a></a></p>
         </div>
       </div>
     </div>
@@ -258,8 +298,7 @@
         <i class="fas fa-map-marker-alt"></i>
         <div>
           <h4>Address</h4>
-          <p><a href="https://maps.app.goo.gl/rkcXg87iD3Fo8mxA7">Corporate Communications Department, NLC India Limited,
-          Museum Road, Block-2, Neyveli Township, Neyveli, Cuddalore Dt., Tamil Nadu - 607801</a></p>
+          <p><a href="https://maps.app.goo.gl/rkcXg87iD3Fo8mxA7">Corporate Communications Department, Museum Road, Block-2, Neyveli Township, Neyveli, Cuddalore Dt., Tamil Nadu - 607801  <a style="color: #f59e0b;" href="https://maps.app.goo.gl/rkcXg87iD3Fo8mxA7">- click to view on map</a></a></p>
         </div>
       </div>
     </div>
@@ -271,13 +310,15 @@
        FOOTER
   ============================================== -->
   <footer>
+    <p style="font-weight: 600; font-size: larger;">Follow us on social media</p>
     <div class="social-media">
       <a href="https://www.facebook.com/nlcindialtd/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
       <a href="https://in.linkedin.com/in/nlc-india-limited-nlcil-148a53210?trk=public_post_feed-actor-name" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
       <a href="https://www.instagram.com/nlcindialtd" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/channel/UCFJEW-cr65ECpDALqd-poA" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.youtube.com/@NLCIndiaLimited" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
       <a href="https://x.com/nlcindialimited" target="_blank" rel="noopener noreferrer"><i class="fab fa-x-twitter"></i></a>
       <a href="https://www.threads.com/@nlcindialtd" target="_blank" rel="noopener noreferrer"><i class="fab fa-threads"></i></a>
+      <a href="https://whatsapp.com/channel/0029Vb6TTz0FCCobtT1YD617" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
     </div>
     <p>Corporate Communications Department, NLC India Limited,
 Museum Road, Block-2, Neyveli Township, Neyveli, Cuddalore Dt., Tamil Nadu - 607801</p>
