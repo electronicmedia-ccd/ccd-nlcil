@@ -82,7 +82,7 @@ header {
 }
 
 .logoimg {
-    height: 90px;
+    height: 80px;
     width: auto;
     flex-shrink: 0;
     filter: brightness(1.1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
@@ -451,7 +451,7 @@ header {
     display: grid;
     grid-template-columns: 1.3fr 0.7fr;
     align-items: center;
-    gap: 4rem;
+    /* gap: 4rem; */
     max-width: 1280px;
     margin: 0 auto;
 }
@@ -480,8 +480,8 @@ header {
     max-width: 560px; /* Increased from 440px */
     min-height: 340px; /* Increased from 280px */
     padding: 3rem 2.5rem; /* Generous breathing room */
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(16px);
+    background: rgb(255, 255, 255);
+    /* backdrop-filter: blur(16px); */
     border-radius: 28px;
     border: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0 20px 40px -15px rgba(30, 58, 138, 0.08);
