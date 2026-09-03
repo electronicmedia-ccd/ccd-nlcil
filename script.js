@@ -71,26 +71,55 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function positionSubmenu(dropdown, submenu) {
-        const rect = dropdown.getBoundingClientRect();
-        const submenuHeight = submenu.scrollHeight;
-        const viewportHeight = window.innerHeight;
+  // Ensure submenu is fixed to match getBoundingClientRect coordinates
+  submenu.style.position = "fixed";
+  submenu.style.overflowY = "auto";
 
-        submenu.style.left = rect.left + "px";
+  // Make temporarily measurable if hidden via display: none
+  const wasHidden = window.getComputedStyle(submenu).display === "none";
+  if (wasHidden) {
+    submenu.style.visibility = "hidden";
+    submenu.style.display = "block";
+  }
 
-        if (viewportHeight - rect.bottom < submenuHeight + 20) {
-            const spaceAbove = rect.top;
+  const rect = dropdown.getBoundingClientRect();
+  const submenuRect = submenu.getBoundingClientRect();
+  const submenuHeight = submenuRect.height || submenu.scrollHeight;
+  const submenuWidth = submenuRect.width || submenu.offsetWidth;
 
-            if (spaceAbove > submenuHeight) {
-                submenu.style.top = (rect.top - submenuHeight - 10) + "px";
-            } else {
-                submenu.style.top = rect.bottom + 10 + "px";
-                submenu.style.maxHeight = (viewportHeight - rect.bottom - 20) + "px";
-            }
-        } else {
-            submenu.style.top = rect.bottom + 10 + "px";
-            submenu.style.maxHeight = "80vh";
-        }
-    }
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const margin = 10;
+
+  // --- Horizontal Positioning & Boundaries ---
+  let left = rect.left;
+  if (left + submenuWidth + margin > viewportWidth) {
+    // Flip or align to the right edge of dropdown if it overflows right
+    left = Math.max(margin, rect.right - submenuWidth);
+  }
+  submenu.style.left = `${Math.max(margin, left)}px`;
+
+  // --- Vertical Positioning & Boundaries ---
+  const spaceBelow = viewportHeight - rect.bottom - margin;
+  const spaceAbove = rect.top - margin;
+
+  if (spaceBelow < submenuHeight && spaceAbove > spaceBelow) {
+    // Flip above dropdown
+    const availableHeight = Math.min(spaceAbove, submenuHeight);
+    submenu.style.top = `${rect.top - availableHeight - margin}px`;
+    submenu.style.maxHeight = `${spaceAbove}px`;
+  } else {
+    // Render below dropdown
+    submenu.style.top = `${rect.bottom + margin}px`;
+    submenu.style.maxHeight = `${spaceBelow}px`;
+  }
+
+  // Restore visibility if temporarily displayed
+  if (wasHidden) {
+    submenu.style.visibility = "";
+    submenu.style.display = "";
+  }
+}
 
     // ===========================
     // CLOSE MENU ON OUTSIDE CLICK
