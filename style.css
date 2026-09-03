@@ -232,6 +232,9 @@ header {
     max-height: 80vh;
     overflow-y: auto;
     z-index: 9999;
+    left: 500px;
+    top: 105.12px; 
+    max-height: 682.88px;
 }
 
 .dropdown:hover .submenu {
