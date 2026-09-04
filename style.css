@@ -71,7 +71,7 @@ header {
 .brand {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 0rem;
 }
 
 .brand-text {
@@ -82,7 +82,7 @@ header {
 }
 
 .logoimg {
-    height: 80px;
+    height: 4.3em;
     width: auto;
     flex-shrink: 0;
     filter: brightness(1.1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
@@ -214,33 +214,33 @@ header {
     transform: rotate(180deg);
 }
 
-/* Submenu positioning */
+/* Submenu positioning — drops EXACTLY under its related menu item */
 .submenu {
-    position: fixed; /* Changed from absolute to fixed */
+    position: absolute;   /* anchored to the <li class="dropdown"> it belongs to */
+    top: 100%;
+    left: 50%;
     background: var(--white);
-    min-width: 240px;
+    min-width: 280px;
     list-style: none;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateX(-50%) translateY(-10px);
     transition: var(--transition);
     box-shadow: var(--shadow-lg);
     border-radius: 12px;
-    overflow: hidden;
-    margin-top: 2.9rem;
-    margin-left: 2rem;
-    max-height: 80vh;
+    overflow-x: hidden;
     overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    max-height: 80vh;
     z-index: 9999;
-    left: 500px;
-    top: 105.12px; 
-    max-height: 682.88px;
 }
 
-.dropdown:hover .submenu {
+.dropdown:hover .submenu,
+.dropdown.active .submenu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 .submenu li {
@@ -267,6 +267,7 @@ header {
     background: var(--secondary-blue);
     color: var(--white);
     padding-left: 2rem;
+    min-width: 280px;
 }
 
 /* Scrollbar for submenu if needed */
