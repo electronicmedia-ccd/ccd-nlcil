@@ -35,19 +35,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         toggle.addEventListener('click', function (e) {
 
-            if (window.innerWidth <= 859) {
+            const href = toggle.getAttribute('href');
+            const isPureParent = !href || href === '#';   // MEDIA / QUICK LINKS / OTHER LINKS
+            const isMobile = window.innerWidth <= 859;
+
+            // On mobile, and for pure parent toggles, the click only opens/closes the
+            // submenu — it must NOT navigate or jump to the top of the page.
+            if (isMobile || isPureParent) {
                 e.preventDefault();
                 e.stopPropagation();
+            }
 
-                const isOpen = dropdown.classList.contains('active');
+            const isOpen = dropdown.classList.contains('active');
 
-                // Close all dropdowns
-                dropdowns.forEach(d => d.classList.remove('active'));
+            // Close all dropdowns
+            dropdowns.forEach(d => d.classList.remove('active'));
 
-                // Open clicked one only
-                if (!isOpen) {
-                    dropdown.classList.add('active');
-                }
+            // Open clicked one only (works on desktop AND mobile)
+            if (!isOpen) {
+                dropdown.classList.add('active');
             }
         });
 
@@ -58,73 +64,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ===========================
-    // DESKTOP DROPDOWN POSITIONING
-    // ===========================
-    dropdowns.forEach(dropdown => {
-        const submenu = dropdown.querySelector('.submenu');
-
-        dropdown.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 859 && submenu) {
-                positionSubmenu(dropdown, submenu);
-            }
-        });
-    });
-
-    function positionSubmenu(dropdown, submenu) {
-  // Ensure submenu is fixed to match getBoundingClientRect coordinates
-  submenu.style.position = "fixed";
-  submenu.style.overflowY = "auto";
-
-  // Make temporarily measurable if hidden via display: none
-  const wasHidden = window.getComputedStyle(submenu).display === "none";
-  if (wasHidden) {
-    submenu.style.visibility = "hidden";
-    submenu.style.display = "block";
-  }
-
-  const rect = dropdown.getBoundingClientRect();
-  const submenuRect = submenu.getBoundingClientRect();
-  const submenuHeight = submenuRect.height || submenu.scrollHeight;
-  const submenuWidth = submenuRect.width || submenu.offsetWidth;
-
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-  const margin = 10;
-
-  // --- Horizontal Positioning & Boundaries ---
-  let left = rect.left;
-  if (left + submenuWidth + margin > viewportWidth) {
-    // Flip or align to the right edge of dropdown if it overflows right
-    left = Math.max(margin, rect.right - submenuWidth);
-  }
-  submenu.style.left = `${Math.max(margin, left)}px`;
-
-  // --- Vertical Positioning & Boundaries ---
-  const spaceBelow = viewportHeight - rect.bottom - margin;
-  const spaceAbove = rect.top - margin;
-
-  if (spaceBelow < submenuHeight && spaceAbove > spaceBelow) {
-    // Flip above dropdown
-    const availableHeight = Math.min(spaceAbove, submenuHeight);
-    submenu.style.top = `${rect.top - availableHeight - margin}px`;
-    submenu.style.maxHeight = `${spaceAbove}px`;
-  } else {
-    // Render below dropdown
-    submenu.style.top = `${rect.bottom + margin}px`;
-    submenu.style.maxHeight = `${spaceBelow}px`;
-  }
-
-  // Restore visibility if temporarily displayed
-  if (wasHidden) {
-    submenu.style.visibility = "";
-    submenu.style.display = "";
-  }
-}
-
-    // ===========================
     // CLOSE MENU ON OUTSIDE CLICK
     // ===========================
     document.addEventListener('click', (e) => {
+        // On desktop, close a click-opened dropdown when clicking outside the menu.
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(d => d.classList.remove('active'));
+        }
+
         if (window.innerWidth <= 859) {
             if (!e.target.closest('nav')) {
                 navLinks.classList.remove('active');
@@ -325,7 +272,7 @@ setInterval(() => {
 
     showSlide(slideIndex);
 
-}, 7000);
+}, 4000);
 
 
 /* Initial */
@@ -482,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
   engine.addEventListener('touchend', e => {
     const diffX = startX - e.changedTouches[0].clientX;
     if (Math.abs(diffX) > 40) {
-      if (diffX > 0) { next(); } else { prev(); }
+      if (diffX > 0) { next(); } else { prev(); }   
       resetAutoplay();
     }
   }, { passive: true });
